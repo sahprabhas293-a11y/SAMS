@@ -1,8 +1,9 @@
+from security import get_current_user
 from datetime import date, datetime, timezone
 from typing import Literal
 
 from bson import ObjectId
-from fastapi import APIRouter, HTTPException, status
+from fastapi import APIRouter, HTTPException, status, Depends
 from pydantic import BaseModel, Field, ConfigDict
 from pymongo import DESCENDING
 
@@ -57,10 +58,11 @@ def get_object_id(assignment_id):
 
 
 @router.post("", status_code=status.HTTP_201_CREATED)
-def create_assignment(assignment: AssignmentCreate):
+def create_assignment(assignment: AssignmentCreate, user=Depends(get_current_user)):
     data = assignment.model_dump()
     data["deadline"] = assignment.deadline.isoformat()
     data["completed"] = False
+    data["user_id"] = user["_id"]
     data["created_at"] = datetime.now(timezone.utc)
 
     result = collection.insert_one(data)
@@ -70,15 +72,16 @@ def create_assignment(assignment: AssignmentCreate):
 
 
 @router.get("")
-def list_assignments():
-    items = collection.find().sort("created_at", DESCENDING)
+def list_assignments(user=Depends(get_current_user)):
+    items = collection.find({"user_id": user["_id"]}).sort("created_at", DESCENDING)
     return [serialize_assignment(item) for item in items]
 
 
 @router.put("/{assignment_id}")
 def update_assignment(
     assignment_id: str,
-    assignment: AssignmentUpdate
+    assignment: AssignmentUpdate,
+    user=Depends(get_current_user)
 ):
     object_id = get_object_id(assignment_id)
 
@@ -86,7 +89,7 @@ def update_assignment(
     data["deadline"] = assignment.deadline.isoformat()
 
     result = collection.update_one(
-        {"_id": object_id},
+        {"_id": object_id, "user_id": user["_id"]},
         {"$set": data}
     )
 
@@ -96,19 +99,20 @@ def update_assignment(
             detail="Assignment not found"
         )
 
-    updated = collection.find_one({"_id": object_id})
+    updated = collection.find_one({"_id": object_id, "user_id": user["_id"]})
     return serialize_assignment(updated)
 
 
 @router.patch("/{assignment_id}/complete")
 def update_completion(
     assignment_id: str,
-    payload: CompletionUpdate
+    payload: CompletionUpdate,
+    user=Depends(get_current_user)
 ):
     object_id = get_object_id(assignment_id)
 
     result = collection.update_one(
-        {"_id": object_id},
+        {"_id": object_id, "user_id": user["_id"]},
         {"$set": {"completed": payload.completed}}
     )
 
@@ -118,15 +122,15 @@ def update_completion(
             detail="Assignment not found"
         )
 
-    updated = collection.find_one({"_id": object_id})
+    updated = collection.find_one({"_id": object_id, "user_id": user["_id"]})
     return serialize_assignment(updated)
 
 
 @router.delete("/{assignment_id}")
-def delete_assignment(assignment_id: str):
+def delete_assignment(assignment_id: str, user=Depends(get_current_user)):
     object_id = get_object_id(assignment_id)
 
-    result = collection.delete_one({"_id": object_id})
+    result = collection.delete_one({"_id": object_id, "user_id": user["_id"]})
 
     if result.deleted_count == 0:
         raise HTTPException(

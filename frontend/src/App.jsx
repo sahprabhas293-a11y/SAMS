@@ -1,3 +1,8 @@
+import DeadlinesView from "./components/DeadlinesView";
+import DashboardOverview from "./components/DashboardOverview";
+import { useState as useAuthState, useEffect as useAuthEffect } from "react";
+import AuthPage from "./components/AuthPage";
+import { getCurrentStudent } from "./services/authService";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import {
@@ -14,7 +19,7 @@ import { getAssignments } from "./services/assignmentService";
 
 const API_URL = "http://127.0.0.1:8000";
 
-function App() {
+function DashboardApp() {
   const [backendStatus, setBackendStatus] = useState("Checking...");
   const [databaseStatus, setDatabaseStatus] = useState("Checking...");
   const [assignments, setAssignments] = useState([]);
@@ -131,31 +136,8 @@ function App() {
           <p className="assignment-error" role="alert">{assignmentError}</p>
         )}
 
-        <section className="content-grid">
-          <div className="panel" id="assignments">
-            <h3>Recent Assignments</h3>
-            <div className="empty-state">
-              <BookOpen size={38} />
-              <h4>{assignments.length} assignments recorded</h4>
-              <p>Manage your assignments in the section above.</p>
-            </div>
-          </div>
-
-          <div className="panel" id="deadlines">
-            <h3>Upcoming Deadlines</h3>
-            <div className="empty-state">
-              <CalendarDays size={38} />
-              <h4>{upcoming.length} upcoming deadlines</h4>
-              <p>
-                {upcoming.slice(0, 3).map(a => (
-                  <span key={a.id} className="deadline-entry">
-                    {a.title} — {a.deadline}
-                  </span>
-                ))}
-              </p>
-            </div>
-          </div>
-        </section>
+        <DashboardOverview assignments={assignments} />
+<DeadlinesView assignments={assignments} />
 
         <section className="panel system-panel">
           <h3><Server size={20} /> System Connection</h3>
@@ -181,4 +163,57 @@ function App() {
   );
 }
 
-export default App;
+;
+
+
+function SAMSAuthWrapper() {
+  const [student, setStudent] = useAuthState(null);
+  const [checking, setChecking] = useAuthState(true);
+
+  useAuthEffect(() => {
+    const token = sessionStorage.getItem("sams_token");
+
+    if (!token) {
+      setChecking(false);
+      return;
+    }
+
+    getCurrentStudent(token)
+      .then(setStudent)
+      .catch(() => {
+        sessionStorage.removeItem("sams_token");
+        setStudent(null);
+      })
+      .finally(() => setChecking(false));
+  }, []);
+
+  function handleLogin(result) {
+    sessionStorage.setItem("sams_token", result.access_token);
+    setStudent(result.user);
+  }
+
+  function handleLogout() {
+    sessionStorage.removeItem("sams_token");
+    setStudent(null);
+  }
+
+  if (checking) {
+    return <div className="auth-loading">Loading SAMS...</div>;
+  }
+
+  if (!student) {
+    return <AuthPage onLogin={handleLogin} />;
+  }
+
+  return (
+    <>
+      <div className="student-session">
+        <span>Signed in as {student.name}</span>
+        <button onClick={handleLogout}>Logout</button>
+      </div>
+      <DashboardApp key={student.id} />
+    </>
+  );
+}
+
+export default SAMSAuthWrapper;

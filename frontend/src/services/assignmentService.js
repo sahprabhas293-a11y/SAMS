@@ -29,3 +29,14 @@ export const deleteAssignment = async (id) => {
   const response = await axios.delete(`${API_URL}/${id}`);
   return response.data;
 };
+
+
+axios.interceptors.request.use((config) => {
+  const token = sessionStorage.getItem("sams_token");
+
+  if (token && config.url?.startsWith(API_URL)) {
+    config.headers.Authorization = `Bearer ${token}`;
+  }
+
+  return config;
+});

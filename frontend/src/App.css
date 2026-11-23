@@ -532,3 +532,379 @@ footer {
     justify-content: flex-start;
   }
 }
+
+.auth-page {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 24px;
+  background: linear-gradient(135deg, #edf3ff, #f8faff);
+}
+
+.auth-card {
+  width: 100%;
+  max-width: 430px;
+  background: white;
+  padding: 38px;
+  border-radius: 18px;
+  box-shadow: 0 12px 40px rgba(20, 40, 80, 0.09);
+}
+
+.auth-brand {
+  text-align: center;
+  color: #315bb0;
+  margin-bottom: 30px;
+}
+
+.auth-brand h1 {
+  margin: 8px 0;
+  font-size: 30px;
+}
+
+.auth-brand p {
+  color: #73829b;
+  font-size: 13px;
+}
+
+.auth-card h2 {
+  margin-bottom: 24px;
+  font-size: 22px;
+}
+
+.auth-card form label {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 18px;
+}
+
+.auth-card input {
+  padding: 13px;
+  border: 1px solid #d9e1ed;
+  border-radius: 9px;
+  font: inherit;
+  color: #17233d;
+}
+
+.auth-card form > button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 9px;
+  width: 100%;
+  padding: 13px;
+  border: none;
+  border-radius: 9px;
+  background: #315bb0;
+  color: white;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.auth-card form > button:disabled {
+  opacity: 0.6;
+  cursor: wait;
+}
+
+.auth-error {
+  padding: 12px;
+  border-radius: 8px;
+  background: #fff0f0;
+  color: #ad3131;
+  font-size: 13px;
+}
+
+.auth-switch {
+  text-align: center;
+  margin-top: 22px;
+  font-size: 13px;
+  color: #73829b;
+}
+
+.auth-switch button {
+  border: none;
+  background: transparent;
+  color: #315bb0;
+  cursor: pointer;
+  font-weight: 700;
+  margin-left: 5px;
+}
+
+.student-session {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 16px;
+  padding: 10px 24px;
+  background: #eaf1ff;
+  color: #31518a;
+  font-size: 13px;
+}
+
+.student-session button {
+  background: #315bb0;
+  color: white;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 7px;
+  cursor: pointer;
+}
+
+.auth-loading {
+  display: grid;
+  place-items: center;
+  min-height: 100vh;
+  color: #315bb0;
+  font-weight: 600;
+}
+
+.dashboard-overview {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  margin-top: 24px;
+}
+
+.dashboard-overview-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.overview-panel,
+.progress-panel {
+  background: #fff;
+  border: 1px solid #e8edf5;
+  border-radius: 15px;
+  padding: 24px;
+}
+
+.overview-panel h3,
+.progress-panel h3 {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 17px;
+  margin: 0 0 20px;
+  color: #192742;
+}
+
+.overview-panel h3 svg,
+.progress-panel h3 svg {
+  color: #4169c1;
+}
+
+.overview-entry {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 15px 0;
+  border-top: 1px solid #edf1f7;
+}
+
+.overview-entry strong {
+  display: block;
+  font-size: 14px;
+  color: #1d2c46;
+  overflow-wrap: anywhere;
+}
+
+.overview-entry small {
+  display: block;
+  color: #8490a4;
+  margin-top: 6px;
+}
+
+.overview-pending,
+.overview-completed {
+  font-size: 11px;
+  border-radius: 6px;
+  padding: 6px 10px;
+  white-space: nowrap;
+}
+
+.overview-pending {
+  background: #f0f2f6;
+  color: #66758e;
+}
+
+.overview-completed {
+  background: #e7f8ee;
+  color: #258253;
+}
+
+.overview-date {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 12px;
+  color: #5270a9;
+  white-space: nowrap;
+}
+
+.overview-empty {
+  text-align: center;
+  color: #8995a9;
+  padding: 35px 0;
+  font-size: 13px;
+}
+
+.progress-panel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+}
+
+.progress-panel-header p {
+  font-size: 13px;
+  color: #8995a9;
+}
+
+.progress-panel-header strong {
+  font-size: 27px;
+  color: #315bb0;
+}
+
+.progress-track {
+  height: 12px;
+  background: #e9eef8;
+  border-radius: 20px;
+  overflow: hidden;
+  margin: 20px 0;
+}
+
+.progress-fill {
+  height: 100%;
+  background: #4169c1;
+  border-radius: 20px;
+  transition: width 0.3s ease;
+}
+
+.progress-footer {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  color: #66758e;
+}
+
+.progress-footer span {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+@media (max-width: 800px) {
+  .dashboard-overview-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+#dashboard,
+#assignments,
+#deadlines {
+  scroll-margin-top: 35px;
+}
+
+.sidebar a,
+.sidebar button,
+.nav-item {
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.sidebar a:hover,
+.sidebar button:hover,
+.nav-item:hover {
+  background: #31466c;
+  color: white;
+}
+
+.deadlines-view {
+  background: white;
+  border: 1px solid #e8edf5;
+  border-radius: 15px;
+  padding: 25px;
+  margin-top: 24px;
+}
+
+.deadlines-view > h2 {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0 0 8px;
+  font-size: 20px;
+}
+
+.deadlines-view > p {
+  color: #8490a4;
+  font-size: 13px;
+  margin-bottom: 22px;
+}
+
+.deadline-categories {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.deadline-category {
+  background: #f8faff;
+  border: 1px solid #e8edf5;
+  border-radius: 11px;
+  padding: 18px;
+}
+
+.deadline-category h3 {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  margin: 0 0 16px;
+}
+
+.deadline-list-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 12px 0;
+  border-top: 1px solid #e5eaf3;
+}
+
+.deadline-list-item strong {
+  display: block;
+  font-size: 13px;
+  overflow-wrap: anywhere;
+}
+
+.deadline-list-item p {
+  color: #8490a4;
+  font-size: 12px;
+  margin: 5px 0 0;
+}
+
+.deadline-list-item span {
+  font-size: 12px;
+  color: #4169c1;
+  white-space: nowrap;
+}
+
+.deadline-empty {
+  color: #8490a4;
+  font-size: 12px;
+}
+
+@media (max-width: 900px) {
+  .deadline-categories {
+    grid-template-columns: 1fr;
+  }
+}

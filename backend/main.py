@@ -1,3 +1,5 @@
+from routes.auth import router as auth_router
+from routes.assignments import router as assignments_router
 from database import check_database_connection
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
@@ -59,3 +61,9 @@ def database_health():
         )
 
     return result
+
+
+app.include_router(assignments_router)
+
+
+app.include_router(auth_router)
