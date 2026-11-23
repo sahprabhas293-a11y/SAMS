@@ -9,14 +9,42 @@ import {
   Server
 } from "lucide-react";
 import "./App.css";
+import AssignmentManager from "./components/AssignmentManager";
+import { getAssignments } from "./services/assignmentService";
 
 const API_URL = "http://127.0.0.1:8000";
 
 function App() {
   const [backendStatus, setBackendStatus] = useState("Checking...");
   const [databaseStatus, setDatabaseStatus] = useState("Checking...");
+  const [assignments, setAssignments] = useState([]);
+  const [assignmentError, setAssignmentError] = useState("");
+
+  async function refreshAssignments() {
+    try {
+      const data = await getAssignments();
+      setAssignments(data);
+      setAssignmentError("");
+    } catch {
+      setAssignmentError("Unable to load assignments. Check the backend.");
+    }
+  }
+
+  const completedCount = assignments.filter(a => a.completed).length;
+  const today = new Date().toLocaleDateString("en-CA");
+
+  const upcoming = assignments
+    .filter(a => !a.completed && a.deadline >= today)
+    .sort((a, b) => a.deadline.localeCompare(b.deadline));
+
+  const stats = [
+    { title: "Total Assignments", value: assignments.length, icon: BookOpen },
+    { title: "Upcoming Deadlines", value: upcoming.length, icon: CalendarDays },
+    { title: "Completed Tasks", value: completedCount, icon: CheckCircle2 }
+  ];
 
   useEffect(() => {
+    refreshAssignments();
     axios.get(`${API_URL}/health`)
       .then(() => setBackendStatus("Connected"))
       .catch(() => setBackendStatus("Disconnected"));
@@ -26,11 +54,7 @@ function App() {
       .catch(() => setDatabaseStatus("Disconnected"));
   }, []);
 
-  const stats = [
-    { title: "Total Assignments", value: 0, icon: BookOpen },
-    { title: "Upcoming Deadlines", value: 0, icon: CalendarDays },
-    { title: "Completed Tasks", value: 0, icon: CheckCircle2 }
-  ];
+
 
   return (
     <div className="app">
@@ -98,15 +122,22 @@ function App() {
           })}
         </section>
 
+        <AssignmentManager
+          assignments={assignments}
+          refreshAssignments={refreshAssignments}
+        />
+
+        {assignmentError && (
+          <p className="assignment-error" role="alert">{assignmentError}</p>
+        )}
+
         <section className="content-grid">
           <div className="panel" id="assignments">
             <h3>Recent Assignments</h3>
             <div className="empty-state">
               <BookOpen size={38} />
-              <h4>No assignments yet</h4>
-              <p>
-                Your assignments will appear here once created.
-              </p>
+              <h4>{assignments.length} assignments recorded</h4>
+              <p>Manage your assignments in the section above.</p>
             </div>
           </div>
 
@@ -114,9 +145,13 @@ function App() {
             <h3>Upcoming Deadlines</h3>
             <div className="empty-state">
               <CalendarDays size={38} />
-              <h4>No upcoming deadlines</h4>
+              <h4>{upcoming.length} upcoming deadlines</h4>
               <p>
-                Your scheduled deadlines will appear here.
+                {upcoming.slice(0, 3).map(a => (
+                  <span key={a.id} className="deadline-entry">
+                    {a.title} — {a.deadline}
+                  </span>
+                ))}
               </p>
             </div>
           </div>
