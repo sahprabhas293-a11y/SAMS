@@ -1,0 +1,12 @@
+sequenceDiagram
+    actor Student
+    participant React
+    participant FastAPI
+    participant MongoDB
+    Student->>React: Enter email and password
+    React->>FastAPI: POST /api/auth/login
+    FastAPI->>MongoDB: Find student by email
+    MongoDB-->>FastAPI: Student record
+    FastAPI->>FastAPI: Verify password hash
+    FastAPI-->>React: JWT and student profile
+    React-->>Student: Display dashboard

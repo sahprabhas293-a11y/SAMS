@@ -1,0 +1,19 @@
+classDiagram
+    class Student {
+        +ObjectId id
+        +String name
+        +String email
+        +String password_hash
+    }
+    class Assignment {
+        +ObjectId id
+        +ObjectId user_id
+        +String title
+        +String subject
+        +String description
+        +Date deadline
+        +String priority
+        +Boolean completed
+        +DateTime created_at
+    }
+    Student "1" --> "0..*" Assignment : owns
