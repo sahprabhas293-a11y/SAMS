@@ -58,3 +58,17 @@ The prototype does not currently provide email verification, password recovery o
 ## 7. Acceptance Criteria
 
 The system is acceptable when students can register and log in, manage their own assignments, view accurate deadlines and progress, and cannot access another student's assignments.
+
+## 8. Additional Functional Requirements
+
+| ID | Requirement | Priority |
+|----|-------------|----------|
+| FR13 | View assignment deadlines in a monthly calendar | High |
+| FR14 | Navigate between calendar months | Medium |
+| FR15 | Search assignments by title, subject and description | High |
+| FR16 | Filter assignments by priority and status | High |
+| FR17 | Sort assignments by deadline or title | Medium |
+| FR18 | Display assignment status analytics | High |
+| FR19 | Display subject-wise academic progress | Medium |
+| FR20 | Display upcoming and overdue deadline reminders | High |
+| FR21 | Display authenticated student profile information | Medium |

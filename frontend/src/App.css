@@ -908,3 +908,73 @@ html {
     grid-template-columns: 1fr;
   }
 }
+
+/* Enhanced SAMS navigation */
+
+html {
+  scroll-behavior: smooth;
+}
+
+.sidebar {
+  overflow-y: auto;
+}
+
+.sidebar nav {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.sidebar nav a {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 13px 15px;
+  border-radius: 9px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+
+.sidebar nav a:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+}
+
+.sidebar nav a.active {
+  background: #345bb1;
+  color: white;
+  font-weight: 600;
+}
+
+.sidebar nav a:focus-visible {
+  outline: 2px solid #93b4ff;
+  outline-offset: 2px;
+}
+
+.sams-academic-tools {
+  margin-top: 25px;
+  margin-bottom: 25px;
+}
+
+#dashboard,
+#assignments,
+#deadlines,
+#calendar,
+#search,
+#analytics,
+#notifications,
+#profile {
+  scroll-margin-top: 25px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .sidebar nav a {
+    transition: none;
+  }
+}
+

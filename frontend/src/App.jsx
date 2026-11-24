@@ -1,3 +1,11 @@
+
+import AcademicTools from "./components/enhancements/AcademicTools";
+import {
+  Search,
+  BarChart3,
+  Bell,
+  UserCircle
+} from "lucide-react";
 import DeadlinesView from "./components/DeadlinesView";
 import DashboardOverview from "./components/DashboardOverview";
 import { useState as useAuthState, useEffect as useAuthEffect } from "react";
@@ -19,7 +27,24 @@ import { getAssignments } from "./services/assignmentService";
 
 const API_URL = "http://127.0.0.1:8000";
 
-function DashboardApp() {
+function DashboardApp({ student }) {
+  const [activeSection, setActiveSection] = useState("dashboard");
+
+  useEffect(() => {
+    function updateSection() {
+      const section = window.location.hash.slice(1);
+      setActiveSection(section || "dashboard");
+    }
+
+    updateSection();
+
+    window.addEventListener("hashchange", updateSection);
+
+    return () => {
+      window.removeEventListener("hashchange", updateSection);
+    };
+  }, []);
+
   const [backendStatus, setBackendStatus] = useState("Checking...");
   const [databaseStatus, setDatabaseStatus] = useState("Checking...");
   const [assignments, setAssignments] = useState([]);
@@ -72,16 +97,43 @@ function DashboardApp() {
         <p className="sidebar-label">ACADEMIC MANAGEMENT</p>
 
         <nav>
-          <a href="#dashboard" className="active">
+          <a href="#dashboard" className={activeSection === "dashboard" ? "active" : ""}>
             <LayoutDashboard size={19} /> Dashboard
           </a>
-          <a href="#assignments">
+          <a href="#assignments" className={activeSection === "assignments" ? "active" : ""}>
             <BookOpen size={19} /> Assignments
           </a>
-          <a href="#deadlines">
+          <a href="#deadlines" className={activeSection === "deadlines" ? "active" : ""}>
             <CalendarDays size={19} /> Deadlines
           </a>
+        
+          <a href="#calendar"
+            className={activeSection === "calendar" ? "active" : ""}>
+            <CalendarDays size={19} /> Calendar
+          </a>
+
+          <a href="#search"
+            className={activeSection === "search" ? "active" : ""}>
+            <Search size={19} /> Search &amp; Filters
+          </a>
+
+          <a href="#analytics"
+            className={activeSection === "analytics" ? "active" : ""}>
+            <BarChart3 size={19} /> Analytics
+          </a>
+
+          <a href="#notifications"
+            className={activeSection === "notifications" ? "active" : ""}>
+            <Bell size={19} /> Notifications
+          </a>
+
+          <a href="#profile"
+            className={activeSection === "profile" ? "active" : ""}>
+            <UserCircle size={19} /> My Profile
+          </a>
+
         </nav>
+
 
         <div className="sidebar-footer">
           Smart Academic Management System
@@ -97,7 +149,9 @@ function DashboardApp() {
               Organise your assignments, deadlines and progress.
             </p>
           </div>
-          <div className="avatar">S</div>
+          <div className="avatar">
+            {student?.name?.charAt(0).toUpperCase() || "S"}
+          </div>
         </header>
 
         <section className="welcome">
@@ -138,6 +192,12 @@ function DashboardApp() {
 
         <DashboardOverview assignments={assignments} />
 <DeadlinesView assignments={assignments} />
+
+        <AcademicTools
+          student={student}
+          assignments={assignments}
+        />
+
 
         <section className="panel system-panel">
           <h3><Server size={20} /> System Connection</h3>
@@ -211,7 +271,7 @@ function SAMSAuthWrapper() {
         <span>Signed in as {student.name}</span>
         <button onClick={handleLogout}>Logout</button>
       </div>
-      <DashboardApp key={student.id} />
+      <DashboardApp key={student.id} student={student} />
     </>
   );
 }

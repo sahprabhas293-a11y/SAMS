@@ -7,3 +7,47 @@
 *.pyc
 frontend/node_modules/
 frontend/dist/
+
+# Local configuration
+.env
+.env.*
+!.env.example
+
+# Dependencies and generated files
+node_modules/
+.venv/
+dist/
+__pycache__/
+.pytest_cache/
+*.pyc
+
+# Development backups
+backups/
+*.bak
+*.backup
+App.before_*.jsx
+
+# macOS files
+.DS_Store
+
+# Local configuration
+.env
+.env.*
+!.env.example
+
+# Dependencies and generated files
+node_modules/
+.venv/
+dist/
+__pycache__/
+.pytest_cache/
+*.pyc
+
+# Development backups
+backups/
+*.bak
+*.backup
+App.before_*.jsx
+
+# macOS files
+.DS_Store

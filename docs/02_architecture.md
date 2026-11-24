@@ -67,3 +67,22 @@ SAMS uses password hashing and token-based authentication.
 Assignment queries use the authenticated user's identifier to enforce record ownership.
 
 The prototype requires additional hardening before public deployment, including rate limiting, secure transport, session revocation and production configuration.
+
+## 6. Enhanced Frontend Architecture
+
+The frontend includes five additional academic tools:
+
+- Academic Calendar
+- Assignment Search and Filters
+- Academic Analytics
+- Academic Notifications
+- Student Profile
+
+These components receive assignment information from the
+existing authenticated dashboard.
+
+Recharts provides assignment status and subject-wise
+progress visualisations.
+
+No additional database collections are required because
+the new features reuse existing assignment and student data.

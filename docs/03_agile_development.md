@@ -72,3 +72,17 @@ Automated testing helped verify that assignment records were protected against a
 ## 5. Limitations
 
 The development process is Agile-inspired. Formal Scrum ceremonies, sprint reviews and team responsibilities should only be documented if they were actually performed.
+
+## 6. Development Increment 6: Frontend Enhancement
+
+The final frontend development increment introduced:
+
+- Interactive academic calendar
+- Assignment search and filtering
+- Academic analytics
+- Deadline notifications
+- Student profile
+- Enhanced sidebar navigation
+
+Existing backend endpoints and database structures were
+retained to minimise unnecessary architectural changes.

@@ -1,0 +1,450 @@
+
+.sams-academic-tools {
+  display: grid;
+  gap: 24px;
+  min-width: 0;
+  color: #182640;
+}
+
+.sams-tool-panel {
+  background: #fff;
+  border: 1px solid #e1e8f2;
+  border-radius: 14px;
+  padding: 25px;
+  box-shadow: 0 4px 18px rgba(26, 48, 83, 0.04);
+  scroll-margin-top: 24px;
+}
+
+.sams-tool-heading {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 25px;
+}
+
+.sams-tool-heading h2 {
+  margin: 0 0 5px;
+  font-size: 21px;
+  color: #182640;
+}
+
+.sams-tool-heading p {
+  margin: 0;
+  font-size: 13px;
+  color: #718096;
+}
+
+.sams-tool-icon {
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  flex-shrink: 0;
+  background: #eaf0ff;
+  color: #4169c1;
+  border-radius: 12px;
+}
+
+.sams-tool-panel button {
+  cursor: pointer;
+  background: #edf2ff;
+  color: #315bb0;
+  border: 1px solid #dce5f6;
+  border-radius: 7px;
+  padding: 9px 14px;
+  font-size: 13px;
+}
+
+.sams-tool-panel button:hover {
+  background: #dce7ff;
+}
+
+.sams-tool-panel button:focus-visible,
+.sams-tool-panel input:focus-visible,
+.sams-tool-panel select:focus-visible {
+  outline: 3px solid #4169c1;
+  outline-offset: 2px;
+}
+
+/* Calendar */
+
+.sams-calendar-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.sams-calendar-toolbar h3 {
+  flex: 1;
+  text-align: center;
+  font-size: 18px;
+}
+
+.sams-calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  border: 1px solid #e1e8f2;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.sams-calendar-weekday {
+  padding: 12px 4px;
+  text-align: center;
+  background: #f0f4fb;
+  font-weight: 600;
+  font-size: 12px;
+}
+
+.sams-calendar-cell {
+  min-height: 100px;
+  padding: 8px;
+  border-top: 1px solid #e1e8f2;
+  border-right: 1px solid #e1e8f2;
+  overflow-wrap: anywhere;
+  font-size: 12px;
+}
+
+.sams-calendar-cell.empty {
+  background: #f8fafc;
+}
+
+.sams-calendar-cell.today {
+  background: #edf3ff;
+  box-shadow: inset 0 0 0 2px #4169c1;
+}
+
+.sams-calendar-event {
+  margin-top: 7px;
+  padding: 5px;
+  border-radius: 5px;
+  font-size: 11px;
+  background: #e6eeff;
+  color: #315bb0;
+}
+
+.sams-calendar-event.completed {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.sams-calendar-event.overdue {
+  background: #fee2e2;
+  color: #b91c1c;
+}
+
+.sams-legend {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-top: 18px;
+  font-size: 12px;
+  color: #64748b;
+}
+
+.sams-legend span {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.sams-legend i {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+}
+
+.pending-dot { background: #4169c1; }
+.completed-dot { background: #16a34a; }
+.overdue-dot { background: #dc2626; }
+
+/* Search */
+
+.sams-filter-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 14px;
+}
+
+.sams-filter-grid label {
+  display: grid;
+  gap: 7px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.sams-filter-grid input,
+.sams-filter-grid select {
+  width: 100%;
+  box-sizing: border-box;
+  min-width: 0;
+  padding: 11px;
+  border: 1px solid #dce4ef;
+  background: #fff;
+  color: #182640;
+  border-radius: 8px;
+  font-size: 13px;
+}
+
+.sams-search-summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 20px 0;
+  font-size: 13px;
+  color: #64748b;
+}
+
+.sams-table-wrapper {
+  overflow-x: auto;
+}
+
+.sams-data-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.sams-data-table th,
+.sams-data-table td {
+  padding: 15px 12px;
+  text-align: left;
+  border-bottom: 1px solid #e5ebf4;
+}
+
+.sams-data-table th {
+  background: #f4f7fc;
+  color: #52627c;
+}
+
+.sams-status {
+  display: inline-block;
+  border-radius: 20px;
+  padding: 5px 10px;
+  font-size: 11px;
+  background: #e6eeff;
+  color: #315bb0;
+}
+
+.sams-status.completed {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.sams-status.overdue {
+  background: #fee2e2;
+  color: #b91c1c;
+}
+
+/* Analytics */
+
+.sams-analytics-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 14px;
+  margin-bottom: 22px;
+}
+
+.sams-analytics-stat {
+  padding: 18px;
+  border-radius: 10px;
+  background: #f5f8fd;
+  border: 1px solid #e5ebf4;
+}
+
+.sams-analytics-stat span {
+  display: block;
+  color: #64748b;
+  font-size: 12px;
+  margin-bottom: 10px;
+}
+
+.sams-analytics-stat strong {
+  font-size: 27px;
+  color: #182640;
+}
+
+.sams-chart-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.sams-chart-card {
+  min-width: 0;
+  border: 1px solid #e5ebf4;
+  border-radius: 12px;
+  padding: 15px;
+}
+
+.sams-chart-card h3 {
+  font-size: 15px;
+  margin: 5px 0 20px;
+}
+
+/* Notifications */
+
+.sams-notification-count {
+  font-size: 13px;
+  color: #64748b;
+  margin-bottom: 18px;
+}
+
+.sams-notification {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: #f1f5ff;
+  border-left: 4px solid #4169c1;
+  border-radius: 8px;
+  padding: 17px;
+  margin-bottom: 12px;
+  color: #315bb0;
+}
+
+.sams-notification.urgent {
+  background: #fff1f2;
+  border-left-color: #dc2626;
+  color: #b91c1c;
+}
+
+.sams-notification div {
+  flex: 1;
+  min-width: 0;
+}
+
+.sams-notification h3 {
+  font-size: 15px;
+  margin: 0 0 6px;
+  overflow-wrap: anywhere;
+}
+
+.sams-notification p {
+  margin: 0 0 6px;
+  font-size: 13px;
+}
+
+.sams-notification small {
+  color: #64748b;
+}
+
+.sams-notification-priority {
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.sams-empty-message {
+  padding: 30px 15px;
+  text-align: center;
+  color: #64748b;
+  font-size: 13px;
+}
+
+/* Profile */
+
+.sams-profile-banner {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  background: linear-gradient(120deg, #244a9a, #4169c1);
+  color: white;
+  padding: 30px;
+  border-radius: 12px;
+  margin-bottom: 25px;
+}
+
+.sams-profile-avatar {
+  width: 80px;
+  height: 80px;
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.2);
+  font-size: 30px;
+  font-weight: 700;
+}
+
+.sams-profile-banner h2 {
+  color: white;
+  margin: 0 0 8px;
+}
+
+.sams-profile-banner p {
+  margin: 0;
+  color: #e0eaff;
+}
+
+.sams-profile-details {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+  margin-bottom: 25px;
+}
+
+.sams-profile-details > div {
+  display: grid;
+  gap: 10px;
+  padding: 18px;
+  border: 1px solid #e5ebf4;
+  border-radius: 10px;
+  overflow-wrap: anywhere;
+}
+
+.sams-profile-details svg {
+  color: #4169c1;
+}
+
+.sams-profile-details span {
+  color: #64748b;
+  font-size: 12px;
+}
+
+.sams-profile-details strong {
+  font-size: 14px;
+}
+
+/* Responsive layout */
+
+@media (max-width: 900px) {
+
+  .sams-filter-grid,
+  .sams-chart-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .sams-calendar-cell {
+    min-height: 75px;
+    padding: 4px;
+  }
+
+}
+
+@media (max-width: 600px) {
+
+  .sams-tool-panel {
+    padding: 15px;
+  }
+
+  .sams-filter-grid,
+  .sams-chart-grid,
+  .sams-profile-details {
+    grid-template-columns: 1fr;
+  }
+
+  .sams-calendar-cell {
+    min-height: 65px;
+  }
+
+  .sams-calendar-event {
+    font-size: 9px;
+    padding: 3px;
+  }
+
+  .sams-profile-banner {
+    padding: 20px;
+  }
+
+}
+
